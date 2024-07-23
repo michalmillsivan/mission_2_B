@@ -25,7 +25,16 @@ async function init() {
         } //omg it workssss yay mee!! now the fav button:)
     });
 
+    //sorttttttttttttttttt!!!
+    $("#user-list").sortable({ //Makes the user list sortable using jQuery UI.
+        update: function (event, ui) { //Saves the new order of users whenever the list is reordered.
+            saveUsersOrder();
+        }
+    }).disableSelection(); //This method is chained to the sortable initialization to prevent text selection within the #user-list element.
+
     updateFavoritesCounter(); //Updates the favorites counter display.
+
+
 }
 
 async function loadUsersApi(count) { //fetchhhhh.
@@ -49,7 +58,7 @@ function drawUser(user) {
           <p class="card-text">${user.gender}</p>
           <p class="card-text">${user.dob.age}</p>
           <p class="card-text">${user.email}</p>
-          <button class="btn btn-primary favorite-btn" onclick="toggleFavorite('${user.email}')">Favorite</button>
+          <button class="btn btn-light favorite-btn" onclick="toggleFavorite('${user.email}')">🤍</button>
         </div>
       </div>
     </div>
@@ -70,14 +79,12 @@ function toggleFavorite(email) {
     if (isFavorite(email)) {
         favorites = favorites.filter(favEmail => favEmail !== email); // Remove the user from the favorites array if they are already a favorite
         console.log(favorites)
-        favoriteBtn.classList.remove('favorite'); // Remove the 'favorite' class from the button
         console.log(favorites);
-        favoriteBtn.textContent = 'Favorite'; // Change the button text to "Favorite"
+        favoriteBtn.textContent = '🤍'; // Change the button text to unselected heart
     } else {
         favorites.push(email); // Add the user to the favorites array
         console.log(favorites);
-        favoriteBtn.classList.add('favorite'); // Add the 'favorite' class to the button 
-        favoriteBtn.textContent = 'Remove'; // Change the button text to "Remove"
+        favoriteBtn.textContent = '🩷'; // Change the button text to selected heart
     }
 
     updateFavoritesCounter();// Update the favorites counter
@@ -92,6 +99,21 @@ function updateFavoritesCounter() {
     counterElement.textContent = favorites.length; // Update the text content of the element to reflect the number of favorites
 }
 
+function saveUsersOrder() {
+    const orderedUsers = [];
+    const cards = document.querySelectorAll('#user-list .card'); // Select all user cards
+
+    cards.forEach(card => {   // Iterate over each card and extract the email
+        const email = card.getAttribute('data-email');
+        orderedUsers.push(email);
+    });
+
+    localStorage.setItem('orderedUsers', JSON.stringify(orderedUsers));  // Save the ordered user emails to localStorage
+}
+
+
+//hello if anyone see this! in the paperwork you should save the data after refreshing the page but! the users are allways new,
+//so if you select a favorite and refresh the page then you could never unselect him! in my opinion you need to reset or save the favorites somwhere..
 function resetFavorites() {
     favorites = [];
     localStorage.removeItem('favorites');
@@ -101,5 +123,7 @@ function resetFavorites() {
 
 ///ahahahhah it workkssss!!! but now for the worst part, sorttttt!!! but howw???? to the jquery documentation!!!
 //should i maybe apload to git before i ruin everything? yap.
-
+//ok did this now i am lost..
+//lets color everything pink !
+// ok stop
 init()

@@ -1,0 +1,9 @@
+.body {
+    background-color: rgba(208, 154, 163, 0.714);
+    padding-top: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+    background-color: rgba(197, 112, 126, 0.514);
+}
