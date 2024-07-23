@@ -13,7 +13,7 @@ async function init() {
 
     loadUsersApi(usersPerPage)//Loads the initial set of users from the API.
 
-    //load 10 more users bu howwwwww???? i got ittt window height!.
+    //load 10 more users bu howwwwww???? i got ittt window height! thank you god of internet <3.
     window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY || document.documentElement.scrollTop; // Get the scroll position of the window
         const windowHeight = window.innerHeight || document.documentElement.clientHeight; // Get the height of the window viewport
@@ -78,7 +78,6 @@ function toggleFavorite(email) {
 
     if (isFavorite(email)) {
         favorites = favorites.filter(favEmail => favEmail !== email); // Remove the user from the favorites array if they are already a favorite
-        console.log(favorites)
         console.log(favorites);
         favoriteBtn.textContent = '🤍'; // Change the button text to unselected heart
     } else {
@@ -95,7 +94,7 @@ function isFavorite(email) {
 }
 
 function updateFavoritesCounter() {
-    const counterElement = document.getElementById('favorites-counter'); // Select the element with the ID 'favorites-counter'
+    const counterElement = document.querySelector("#favorites-counter"); // Select the element with the ID 'favorites-counter'
     counterElement.textContent = favorites.length; // Update the text content of the element to reflect the number of favorites
 }
 
